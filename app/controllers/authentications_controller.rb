@@ -18,7 +18,8 @@ class AuthenticationsController < ApplicationController
     @authentication = Authentication.new(authentication_params)
 
     if @authentication.save
-      render json: @authentication, status: :created, location: @authentication
+      session[:current_user_id] = @authentication.id
+      render status: :created
     else
       render json: @authentication.errors, status: :unprocessable_entity
     end
