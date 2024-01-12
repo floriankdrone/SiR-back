@@ -1,18 +1,7 @@
+# frozen_string_literal: true
+
+# Authentication Controller
 class AuthenticationsController < ApplicationController
-  before_action :set_authentication, only: %i[ show update destroy ]
-
-  # GET /authentications
-  def index
-    @authentications = Authentication.all
-
-    render json: @authentications
-  end
-
-  # GET /authentications/1
-  def show
-    render json: @authentication
-  end
-
   # POST /authentications
   def create
     @authentication = Authentication.new(authentication_params)
@@ -25,28 +14,16 @@ class AuthenticationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /authentications/1
-  def update
-    if @authentication.update(authentication_params)
-      render json: @authentication
-    else
-      render json: @authentication.errors, status: :unprocessable_entity
-    end
-  end
-
   # DELETE /authentications/1
   def destroy
+    @authentication = Authentication.find(params[:id])
     @authentication.destroy
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_authentication
-      @authentication = Authentication.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def authentication_params
-      params.require(:authentication).permit(:email, :password)
-    end
+  # Only allow a list of trusted parameters through.
+  def authentication_params
+    params.require(:authentication).permit(:email, :password)
+  end
 end
