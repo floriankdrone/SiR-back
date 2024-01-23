@@ -18,7 +18,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
 
     resource '/sessions',
              headers: :any,
-             methods: :post,
+             methods: %i[post delete],
              credentials: true
 
     resource '/profiles',

@@ -13,6 +13,11 @@ class SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    reset_session if session[:current_user_id].present?
+    render json: {}, status: :ok
+  end
+
   private
 
   # Only allow a list of trusted parameters through.
