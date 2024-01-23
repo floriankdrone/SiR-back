@@ -21,6 +21,17 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
              methods: :post,
              credentials: true
 
+    resource '/profiles',
+            headers: :any,
+            methods: :post,
+            credentials: true
+
+    resource '/profile',
+            headers: :any,
+            methods: :get,
+            credentials: true
+
+
     resource '*',
              headers: :any,
              methods: %i[get post put patch delete options head]

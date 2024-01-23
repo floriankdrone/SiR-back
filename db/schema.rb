@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,12 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_240_110_212_531) do
-  create_table 'authentications', force: :cascade do |t|
-    t.string 'email'
-    t.string 'password'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['email'], name: 'index_authentications_on_email', unique: true
+ActiveRecord::Schema[7.0].define(version: 2024_01_23_211724) do
+  create_table "authentications", force: :cascade do |t|
+    t.string "email"
+    t.string "password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_authentications_on_email", unique: true
   end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "username"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "authentication_id"
+    t.index ["authentication_id"], name: "index_profiles_on_authentication_id", unique: true
+  end
+
+  add_foreign_key "profiles", "authentications"
 end
