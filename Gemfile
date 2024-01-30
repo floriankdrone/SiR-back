@@ -21,6 +21,8 @@ gem 'jbuilder'
 
 gem 'rubocop', require: false
 
+gem 'discard', '~> 1.2'
+
 gem 'pry', '~> 0.14.2'
 
 # Use Redis adapter to run Action Cable in production

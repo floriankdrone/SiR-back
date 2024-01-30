@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :posts, only: %i[index create destroy]
   resources :authentications, only: %i[create destroy]
   resources :sessions, only: %i[create destroy]
   get '/profile', to: 'profiles#show'

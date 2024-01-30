@@ -7,6 +7,7 @@
 
 # Read more: https://github.com/cyu/rack-cors
 
+# rubocop:disable Metrics/BlockLength
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins 'localhost:3001'
@@ -22,18 +23,23 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
              credentials: true
 
     resource '/profiles',
-            headers: :any,
-            methods: :post,
-            credentials: true
+             headers: :any,
+             methods: :post,
+             credentials: true
 
     resource '/profile',
-            headers: :any,
-            methods: :get,
-            credentials: true
+             headers: :any,
+             methods: :get,
+             credentials: true
 
+    resource '/posts',
+             headers: :any,
+             methods: %i[post delete],
+             credentials: true
 
     resource '*',
              headers: :any,
              methods: %i[get post put patch delete options head]
   end
 end
+# rubocop:enable Metrics/BlockLength

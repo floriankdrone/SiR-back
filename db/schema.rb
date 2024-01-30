@@ -10,13 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_23_211724) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_24_125659) do
   create_table "authentications", force: :cascade do |t|
     t.string "email"
     t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_authentications_on_email", unique: true
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "text"
+    t.datetime "discarded_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "profile_id"
+    t.index ["discarded_at"], name: "index_posts_on_discarded_at"
+    t.index ["profile_id"], name: "index_posts_on_profile_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -27,5 +37,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_23_211724) do
     t.index ["authentication_id"], name: "index_profiles_on_authentication_id", unique: true
   end
 
+  add_foreign_key "posts", "profiles"
   add_foreign_key "profiles", "authentications"
 end

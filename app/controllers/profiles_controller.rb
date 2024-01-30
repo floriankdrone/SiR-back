@@ -3,7 +3,7 @@
 # Profiles controller
 class ProfilesController < ApplicationController
   def create
-    render status: :unauthorized unless session[:current_user_id]
+    render json: {}, status: :unauthorized unless session[:current_user_id]
     @profile = Profile.new(create_profile_params)
     return render status: :created if @profile.save!
 
